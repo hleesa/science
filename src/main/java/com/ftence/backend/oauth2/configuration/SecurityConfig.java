@@ -25,7 +25,8 @@ public class SecurityConfig {
                 .and()
                 .formLogin()
                 .disable()
-                .oauth2Login();
+                .oauth2Login()
+                .defaultSuccessUrl("/loginSuccess", true);
         return http.build();
     }
 

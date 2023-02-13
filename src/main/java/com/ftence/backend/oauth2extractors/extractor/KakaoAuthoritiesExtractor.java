@@ -1,4 +1,4 @@
-package com.ftence.backend.oauth2.extractor;
+package com.ftence.backend.oauth2extractors.extractor;
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.security.core.GrantedAuthority;

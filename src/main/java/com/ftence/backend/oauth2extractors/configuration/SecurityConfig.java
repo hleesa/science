@@ -1,7 +1,7 @@
-package com.ftence.backend.oauth2.configuration;
+package com.ftence.backend.oauth2extractors.configuration;
 
-import com.ftence.backend.oauth2.extractor.KakaoAuthoritiesExtractor;
-import com.ftence.backend.oauth2.extractor.KakaoPrincipalExtractor;
+import com.ftence.backend.oauth2extractors.extractor.KakaoAuthoritiesExtractor;
+import com.ftence.backend.oauth2extractors.extractor.KakaoPrincipalExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;

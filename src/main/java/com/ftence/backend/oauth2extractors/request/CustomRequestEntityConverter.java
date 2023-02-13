@@ -1,4 +1,4 @@
-package com.ftence.backend.oauth2.request;
+package com.ftence.backend.oauth2extractors.request;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.RequestEntity;

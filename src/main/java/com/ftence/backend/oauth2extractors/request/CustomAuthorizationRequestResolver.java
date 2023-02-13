@@ -1,4 +1,4 @@
-package com.ftence.backend.oauth2.request;
+package com.ftence.backend.oauth2extractors.request;
 
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;

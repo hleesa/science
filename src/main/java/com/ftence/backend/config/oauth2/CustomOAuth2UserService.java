@@ -1,8 +1,8 @@
-package com.ftence.backend.oauth2;
+package com.ftence.backend.config.oauth2;
 
 import com.ftence.backend.entity.User;
-import com.ftence.backend.oauth2.dto.OAuthAttributes;
-import com.ftence.backend.oauth2.dto.SessionUser;
+import com.ftence.backend.config.oauth2.dto.OAuthAttributes;
+import com.ftence.backend.config.oauth2.dto.SessionUser;
 import com.ftence.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

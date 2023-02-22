@@ -66,9 +66,10 @@ public class LoginController {
 
             ResponseEntity<Map> response = restTemplate.exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
             Map userAttributes = response.getBody();
-            model.addAttribute("name", userAttributes.get("name"));
-        }
+            model.addAttribute("name", userAttributes.get("login"));
+//            model.addAttribute("image", userAttributes.get("image_url"));
 
+        }
         return "loginSuccess";
     }
 }

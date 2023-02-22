@@ -14,7 +14,6 @@ public class OAuthAttributes {
     private String intraId;
     private String picture;
 
-
     @Builder
     public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String intraId, String picture) {
         this.attributes = attributes;

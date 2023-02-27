@@ -45,7 +45,7 @@ public class LoginController {
 
         return "oauth_login";
     }
-
+    /**
     @GetMapping("/loginSuccess")
     public String getLoginInfo(Model model, OAuth2AuthenticationToken authentication) {
 
@@ -72,4 +72,5 @@ public class LoginController {
         }
         return "loginSuccess";
     }
+    **/
 }

@@ -1,35 +1,39 @@
 package com.ftence.backend.config.oauth2;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ftence.backend.config.oauth2.dto.SessionUser;
+import com.ftence.backend.entity.User;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import javax.servlet.http.HttpSession;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class HelloController {
 
     private final OAuth2AuthorizedClientService authorizedClientService;
+
+    private final Intra42Service intra42Service;
+
+    private final HttpSession httpSession;
+
     @GetMapping("/callTest")
-    public String callTest(OAuth2AuthenticationToken authentication) {
+    public String callTest(@LoginUser User user, OAuth2AuthenticationToken authentication) {
             OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
 
             WebClient webClient = WebClient.builder()
@@ -40,26 +44,29 @@ public class HelloController {
                     .build();
             webClient.method(HttpMethod.GET);
 
+        Mono<Object> objectMono = webClient.get().retrieve().bodyToMono(Object.class);
+        Object block = objectMono.share().block();
 
-        String result = webClient.get().retrieve().bodyToMono(String.class).block();
-
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-//        Map<String, Object> map = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {});
-        System.out.println(result);
+//        Mono<Test> objectMono2 = webClient.get().retrieve().bodyToMono(Test.class);
+//        Test block2 = objectMono2.share().block();
 
         return "world";
     }
 
-//    static class test
-//    {
-//        private
-//    }
-/*
+    @GetMapping("/")
+    public String index(Model model) {
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("name", user.getIntraId());
+        }
+        return "loginSuccess";
+    }
+
+
     @GetMapping("/world")
     public String world()
     {
+        intra42Service.getData("salee2");
         return "world";
     }
 
@@ -69,5 +76,20 @@ public class HelloController {
         return "logout";
     }
 
-    */
+    @Data
+    static class Test
+    {
+        private String id;
+//        private Boolean validated;
+//        subject sub;
+    }
+
+    static class subject
+    {
+        private Long id;
+        private String name;
+        private String slug;
+        private String parent_id;
+    }
 }
+

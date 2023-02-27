@@ -1,4 +1,4 @@
-package com.ftence.backend.oauth2.dto;
+package com.ftence.backend.config.oauth2.dto;
 
 import com.ftence.backend.entity.Role;
 import com.ftence.backend.entity.User;
